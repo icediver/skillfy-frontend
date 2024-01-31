@@ -1,8 +1,20 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
+import { Mulish, Poppins } from "next/font/google";
+import "../assets/styles/globals.scss";
 
-const inter = Inter({ subsets: ["latin"] });
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  style: ["normal", "italic"],
+  variable: "--font-poppins",
+  display: "swap",
+});
+const mulish = Mulish({
+  subsets: ["latin", "cyrillic"],
+  weight: ["400", "500", "700"],
+  variable: "--font-mulish",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,8 +27,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="en" className={`${poppins.variable} ${mulish.variable}`}>
+      <body className="normal scrolbar-hidden">{children}</body>
     </html>
   );
 }
