@@ -17,6 +17,15 @@ html {
 
 body {
   }
+h1 {
+  @apply text-2.5xl font-medium text-hero-text;
+}
+h2 {
+  @apply text-1.5xl font-medium pt-7 pb-5;
+}
+h3 {
+  @apply text-1.25xl font-medium;
+}
 
 @layer utilities {
   .text-balance {

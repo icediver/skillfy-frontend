@@ -11,12 +11,12 @@ const menu: { title: string; value: string }[] = [
 export function Navbar() {
   return (
     <nav>
-      <ul className="flex gap-12">
+      <ul className="flex gap-10">
         {menu.map((item) => (
           <li key={item.title}>
             <Link
               href={item.value}
-              className="flex items-center gap-3 text-navbar hover:text-blue-800"
+              className="flex items-center gap-2 text-navbar hover:text-blue-800"
             >
               {item.title}
               <FaChevronDown size={12} />

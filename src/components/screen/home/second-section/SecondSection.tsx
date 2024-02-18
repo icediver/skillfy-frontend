@@ -1,87 +1,97 @@
-"use client";
-import PatternGray from "@/assets/image/pattern-gray.png";
-import Button from "@/components/ui/button/Button";
-import { CourseCard } from "@/components/ui/course-card/CourseCard";
-import PrevNextButton from "@/components/ui/prev-next-button/PrevNextButton";
-import Image from "next/image";
-import { useState } from "react";
-import { FaChevronDown } from "react-icons/fa6";
-export function SecondSection() {
-  const [count, setCount] = useState(1);
-  function prevNextHandler({ direction }: { direction: "prev" | "next" }) {
-    if (direction === "next" && count < 10) setCount((state) => state + 1);
-    if (direction === "prev" && count > 0) setCount((state) => state - 1);
-  }
-  return (
-    <article className="relative h-[871px] w-full bg-second-section-background">
-      <Image
-        src={PatternGray}
-        alt="pattern"
-        className="absolute bottom-24 left-1/2 z-0 -ml-10"
-      />
-      <section className="pt-20">
-        <div className="flex justify-between mb-10">
-          <div className="text-4xl font-medium">Get choice of your course</div>
-          <div className="flex gap-6">
-            <div className="flex gap-4 items-center text-hero-text text-md">
-              <p>Design</p>
-              <FaChevronDown size={12} />
-            </div>
-            <Button>View all</Button>
-          </div>
-        </div>
-        <div className="relative flex gap-7 z-10">
-          <CourseCard
-            picture="/uploads/images/business.jpg"
-            rating={"4.5 (120)"}
-            views={"28,500"}
-            lessons={3}
-            title={"Everything You Need to Know About Business"}
-            teacher={"Nicole Brown"}
-            price={99.99}
-            sale={49.65}
-            avatar={"https://i.pravatar.cc/40?img=19"}
-          />
-          <CourseCard
-            picture="/uploads/images/choose.jpg"
-            rating={"4.5 (120)"}
-            views={"28,500"}
-            lessons={3}
-            title={"Statistics Data Science and Business Analysis"}
-            teacher={"Nicole Brown"}
-            price={99.99}
-            sale={49.65}
-            avatar={"https://i.pravatar.cc/40?img=19"}
-          />
-          <CourseCard
-            picture="/uploads/images/course.jpg"
-            rating={"4.5 (120)"}
-            views={"28,500"}
-            lessons={3}
-            title={"AWS Certified Solutions Architect Associate"}
-            teacher={"Nicole Brown"}
-            price={99.99}
-            sale={49.65}
-            avatar={"https://i.pravatar.cc/40?img=19"}
-          />
-        </div>
-        <div className="flex justify-between pt-9 items-center">
-          <PrevNextButton
-            variant={"prev"}
-            onClick={() => prevNextHandler({ direction: "prev" })}
-          />
-          <div className="flex flex-start w-full px-2">
-            <div
-              className="h-1 bg-primary"
-              style={{ width: `${count * 10}%` }}
-            />
-          </div>
-          <PrevNextButton
-            variant={"next"}
-            onClick={() => prevNextHandler({ direction: "next" })}
-          />
-        </div>
-      </section>
-    </article>
-  );
+'use client';
+import PatternGray from '@/assets/image/pattern-gray.png';
+import Button from '@/components/ui/button/Button';
+import { CourseCard } from '@/components/ui/cards/course-card/CourseCard';
+import PrevNextButton from '@/components/ui/prev-next-button/PrevNextButton';
+import Image from 'next/image';
+import { useState } from 'react';
+import { FaChevronDown } from 'react-icons/fa6';
+import { courses } from './courses.data';
+import { TypePaginationCourses } from '@/types/course.interface';
+import { useInView } from 'react-intersection-observer';
+
+interface ISecondSection {
+	courses: TypePaginationCourses;
+	title: string;
+}
+
+export function SecondSection({
+	courses: paginatedCourses,
+	title,
+}: ISecondSection) {
+	const { ref, inView, entry } = useInView({
+		/* Optional options */
+		threshold: 0,
+		delay: 100,
+	});
+	const [count, setCount] = useState(0);
+	function prevNextHandler({ direction }: { direction: 'prev' | 'next' }) {
+		if (paginatedCourses.courses.length <= 3) return;
+		if (direction === 'next' && count < courses.length - 3)
+			setCount((state) => state + 1);
+		if (direction === 'prev' && count > 0) setCount((state) => state - 1);
+	}
+
+	return (
+		<article className="relative h-[871px] w-full bg-second-section-background ">
+			<Image
+				src={PatternGray}
+				alt="pattern"
+				className="absolute bottom-24 left-1/2 z-0 -ml-10"
+			/>
+			<section className="container overflow-hidden pt-20">
+				<div className="mb-10 flex justify-between">
+					<div className="text-4xl font-medium">{title}</div>
+					<div className="flex gap-6">
+						<div className="flex items-center gap-4 text-md text-hero-text">
+							<p>Design</p>
+							<FaChevronDown size={12} />
+						</div>
+						<Button>View all</Button>
+					</div>
+				</div>
+				<div
+					ref={ref}
+					className="relative z-10 flex gap-7 transition-all duration-1000"
+					style={{ marginLeft: -count * 398 }}
+				>
+					{inView &&
+						paginatedCourses.courses.map((course) => (
+							<CourseCard
+								slug={course.slug}
+								images={course.images}
+								rating={course.rating || 0}
+								views={course.views}
+								lessons={course.videos.length}
+								title={course.title}
+								teacher={course.teacher.name}
+								price={course.price}
+								sale={49}
+								teacherAvatar={course.teacher.avatarPath || ''}
+								key={course.title}
+								courseId={course.id}
+							/>
+						))}
+				</div>
+				<div className="flex items-center justify-between pt-9">
+					<PrevNextButton
+						direction={'prev'}
+						onClick={() => prevNextHandler({ direction: 'prev' })}
+					/>
+					<div className="flex-start flex w-full px-2">
+						<div
+							className="h-1 bg-primary"
+							style={{
+								width: `${(1 - (courses.length - count - 3) / (courses.length - 3)) * 100}%`,
+							}}
+						/>
+					</div>
+					<PrevNextButton
+						direction={'next'}
+						onClick={() => prevNextHandler({ direction: 'next' })}
+					/>
+				</div>
+			</section>
+		</article>
+	);
 }

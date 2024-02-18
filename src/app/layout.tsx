@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Mulish, Poppins } from "next/font/google";
 import "../assets/styles/globals.scss";
+import { Providers } from "@/providers/Providers";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -28,7 +29,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${poppins.variable} ${mulish.variable}`}>
-      <body className="normal scrolbar-hidden">{children}</body>
+      <body className="normal scrolbar-hidden">
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }

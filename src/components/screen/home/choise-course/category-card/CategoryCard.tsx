@@ -1,7 +1,10 @@
 import clsx from "clsx";
 import { ICategory } from "../choise-course.data";
+import DynamicIcon, {
+  TypeMaterialIconName,
+} from "@/components/ui/dynamic-icon/DynamicIcon";
 
-export function CategoryCard({ Icon, title, description, color }: ICategory) {
+export function CategoryCard({ icon, title, description, color }: ICategory) {
   return (
     <button
       className="w-full h-[308px] my-4 p-4 text-start rounded filter  hover:contrast-75"
@@ -11,7 +14,10 @@ export function CategoryCard({ Icon, title, description, color }: ICategory) {
         className="h-[58px] w-[58px] rounded flex justify-center items-center text-2xl my-4"
         style={{ background: `${color[1]}` }}
       >
-        <Icon style={{ stroke: `${color[2]}`, fill: `${color[2]}` }} />
+        <DynamicIcon
+          name={icon as TypeMaterialIconName}
+          style={{ stroke: `${color[2]}`, fill: `${color[2]}` }}
+        />
       </div>
       <p
         className={clsx(

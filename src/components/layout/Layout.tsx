@@ -1,10 +1,14 @@
 import { Footer } from "../screen/auth/footer/Footer";
 import { Header } from "./header/Header";
 
-export function Layout({ children }: { children: React.ReactNode }) {
+interface ILayout {
+  variant?: "primary" | "secondary";
+  children: React.ReactNode;
+}
+export function Layout({ children, variant = "primary" }: ILayout) {
   return (
     <>
-      <Header />
+      <Header variant={variant} />
       {children}
       <Footer />
     </>

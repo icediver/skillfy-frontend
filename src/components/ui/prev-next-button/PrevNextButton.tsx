@@ -1,31 +1,36 @@
-import clsx from "clsx";
-import { ButtonHTMLAttributes, ReactNode } from "react";
-import { LuArrowLeft, LuArrowRight } from "react-icons/lu";
+import clsx from 'clsx';
+import { ButtonHTMLAttributes } from 'react';
+import { LuArrowLeft, LuArrowRight } from 'react-icons/lu';
 
 interface IButton extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant: "prev" | "next";
-  color?: "primary" | "secondary";
+	direction: 'prev' | 'next';
+	variant?: 'primary' | 'secondary' | 'third' | 'rounded';
 }
 export default function PrevNextButton({
-  className,
-  color = "primary",
-  variant,
-  ...props
+	className,
+	variant = 'primary',
+	direction,
+	...props
 }: IButton) {
-  return (
-    <button
-      {...props}
-      className={clsx(
-        "flex justify-center items-center rounded active:translate-y-1 text-gray-500 w-14 h-14 text-1.5xl hover:text-primary font-bold",
-        {
-          ["bg-white"]: color === "primary",
-          ["bg-second-section-background"]: color === "secondary",
-        },
+	return (
+		<button
+			{...props}
+			className={clsx(
+				'flex h-14 w-14 items-center justify-center rounded text-1.5xl font-bold text-gray-500  active:translate-y-1',
+				{
+					['bg-white hover:text-primary']: variant === 'primary',
+					['bg-second-section-background hover:text-primary']:
+						variant === 'secondary',
+					['bg-third text-white filter  hover:contrast-75']:
+						variant === 'third',
+					['rounded-full bg-white/30 text-white filter hover:contrast-75']:
+						variant === 'rounded',
+				},
 
-        className,
-      )}
-    >
-      {variant === "next" ? <LuArrowRight /> : <LuArrowLeft />}
-    </button>
-  );
+				className
+			)}
+		>
+			{direction === 'next' ? <LuArrowRight /> : <LuArrowLeft />}
+		</button>
+	);
 }

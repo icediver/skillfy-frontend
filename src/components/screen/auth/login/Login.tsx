@@ -5,23 +5,33 @@ import Field from "@/components/ui/form/field/Field";
 import google from "@/assets/image/google.png";
 import { useForm } from "react-hook-form";
 import Image from "next/image";
-interface IRegister {
-  email: string;
-  password: string;
-}
+import { IFormData } from "@/services/auth/auth.types";
+import { authService } from "@/services/auth/auth.service";
+import { saveTokenStorage } from "@/services/auth/auth.helper";
+import { useRouter } from "next/navigation";
+import { useMutation } from "@tanstack/react-query";
 export function Login() {
+  const { push } = useRouter();
   const {
     register,
     formState: { errors },
     handleSubmit,
-    setValue,
-    resetField,
-    watch,
-  } = useForm<IRegister>({
+    reset,
+  } = useForm<IFormData>({
     mode: "onChange",
   });
-  function onSubmit({ email, password }: IRegister) {
-    console.log(email, password);
+  const { mutate: mutateLogin, isPending: isRegisterPending } = useMutation({
+    mutationKey: ["login"],
+    mutationFn: (data: IFormData) => authService.main("login", data),
+    onSuccess({ data }) {
+      saveTokenStorage(data.accessToken);
+      reset();
+      push("/");
+    },
+  });
+
+  function onSubmit(data: IFormData) {
+    mutateLogin(data);
   }
   return (
     <form

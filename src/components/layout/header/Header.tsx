@@ -1,13 +1,25 @@
 import { Logo } from "@/components/ui/logo/Logo";
 import { Navbar } from "./navbar/Navbar";
 import { ProfileHeader } from "./profile-header/ProfileHeader";
+import clsx from "clsx";
 
-export function Header() {
+interface IHeader {
+  variant?: "primary" | "secondary";
+}
+
+export function Header({ variant = "primary" }: IHeader) {
   return (
-    <div className="relative w-[1170px] z-50 mx-auto flex items-center justify-between pt-11">
-      <Logo />
-      <Navbar />
-      <ProfileHeader />
+    <div
+      className={clsx("relative w-full z-50   py-9", {
+        ["bg-main-background"]: variant === "primary",
+        ["bg-white"]: variant === "secondary",
+      })}
+    >
+      <section className="w-[1170px] mx-auto flex items-center justify-between">
+        <Logo />
+        <Navbar />
+        <ProfileHeader />
+      </section>
     </div>
   );
 }

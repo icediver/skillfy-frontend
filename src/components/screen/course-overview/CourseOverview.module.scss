@@ -1,0 +1,15 @@
+.backround {
+  position: relative;
+  color:#fff;
+}
+
+.background:before {
+  content: "";
+  position: absolute;
+  top: 100px;
+  height: 560px;
+  left: 0;
+  right: 0;
+  background: var(--main-background);
+  z-index:-1;
+}

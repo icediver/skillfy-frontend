@@ -5,8 +5,12 @@ import Field from "@/components/ui/form/field/Field";
 import google from "@/assets/image/google.png";
 import { useForm } from "react-hook-form";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
+import { useMutation } from "@tanstack/react-query";
+import { authService } from "@/services/auth/auth.service";
+import { saveTokenStorage } from "@/services/auth/auth.helper";
+import { IFormData } from "@/services/auth/auth.types";
 interface IRegister {
   name: string;
   email: string;
@@ -14,18 +18,27 @@ interface IRegister {
 }
 
 export function Register() {
+  const { push } = useRouter();
   const {
     register,
     formState: { errors },
     handleSubmit,
-    setValue,
-    resetField,
-    watch,
-  } = useForm<IRegister>({
+    reset,
+  } = useForm<IFormData>({
     mode: "onChange",
   });
-  function onSubmit({ email, password }: IRegister) {
-    console.log(email, password);
+  const { mutate: mutateRegister, isPending: isRegisterPending } = useMutation({
+    mutationKey: ["register"],
+    mutationFn: (data: IFormData) => authService.main("register", data),
+    onSuccess({ data }) {
+      saveTokenStorage(data.accessToken);
+      reset();
+      push("/");
+    },
+  });
+
+  function onSubmit(data: IFormData) {
+    mutateRegister(data);
   }
 
   return (

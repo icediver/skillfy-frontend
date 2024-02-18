@@ -5,6 +5,7 @@ const primary = "#e30b13";
 export const plugins = [
   // require("@tailwindcss/forms"),
   // require("@tailwindcss/aspect-ratio"),
+  require("tailwindcss-animate"),
   plugin(({ addComponents, theme, addUtilities, addBase }) => {
     addComponents({
       ".btn-primary": {

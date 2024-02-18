@@ -1,5 +1,4 @@
 import pattern from "@/assets/image/Pattern.png";
-import video from "@/assets/image/video.png";
 import hero from "@/assets/image/hero.jpg";
 import { MainSearch } from "@/components/ui/search/MainSearch";
 
@@ -7,12 +6,12 @@ import Image from "next/image";
 import PlayButton from "@/components/ui/play-button/PlayButton";
 export function Hero() {
   return (
-    <article className="relative h-[900px] -mt-[88px] pt-28  z-0 bg-main-background">
+    <article className="relative h-[900px]  pt-28  z-0 bg-main-background">
       <Image
         src={pattern}
         alt={"pattern"}
         className="absolute bottom-1 left-1"
-      />{" "}
+      />
       <Image
         src={pattern}
         alt={"pattern"}

@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation";
 export function AuthProfile() {
   const pathname = usePathname();
   const isLogin = pathname === "/auth/login";
-  console.log(pathname, isLogin);
 
   return (
     <div className="w-[778px] flex justify-end pt-10 items-center text-navbar gap-10">
