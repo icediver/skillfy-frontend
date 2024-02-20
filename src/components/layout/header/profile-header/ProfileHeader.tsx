@@ -1,6 +1,7 @@
 'use client';
 import Button from '@/components/ui/button/Button';
-import { UserService } from '@/services/user.service';
+import { useCart } from '@/hooks/useCart';
+import { useProfile } from '@/hooks/useProfile';
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -9,19 +10,21 @@ import { FiSearch } from 'react-icons/fi';
 import { PiShoppingCartSimpleBold } from 'react-icons/pi';
 
 export function ProfileHeader() {
-	const { data: profile } = useQuery({
-		queryKey: ['profile'],
-		queryFn: () => UserService.getProfile(),
-		select: ({ data }) => data,
-	});
+	const { profile } = useProfile();
+	const { items } = useCart();
 
 	return (
 		<div className="flex w-[340-px] items-center gap-10 text-navbar">
 			<button className="hover:text-blue-800">
 				<FiSearch />
 			</button>
-			<Link href={'/cart'} className="hover:text-blue-800">
+			<Link href={'/cart'} className="relative hover:text-blue-800">
 				<PiShoppingCartSimpleBold />
+				{!!items.length && (
+					<div className="absolute -right-2 -top-2 flex h-3 w-3 items-center justify-center rounded-full bg-primary text-xss text-white duration-300 animate-in fade-in">
+						{items.length}
+					</div>
+				)}
 			</Link>
 			{!profile ? (
 				<Link href={'/auth/register'}>

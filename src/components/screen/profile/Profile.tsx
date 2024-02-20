@@ -1,10 +1,25 @@
+'use client';
 import clsx from 'clsx';
 import styles from './Profile.module.scss';
 import { IUserProfile } from '@/types/auth.interface';
 import { CourseCard } from '@/components/ui/cards/course-card/CourseCard';
 import Image from 'next/image';
+import Button from '@/components/ui/button/Button';
+import { AuthService } from '@/services/auth/auth.service';
+import { useMutation } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
 
 export function Profile(profile: IUserProfile) {
+	const { push } = useRouter();
+	const { mutate: logout } = useMutation({
+		mutationKey: ['logout'],
+		mutationFn: () => AuthService.logout(),
+	});
+
+	function logoutHandler() {
+		logout();
+		push('/auth/login');
+	}
 	return (
 		<section className={clsx('container', styles.background)}>
 			<div className="h-auto">
@@ -21,9 +36,12 @@ export function Profile(profile: IUserProfile) {
 						</div>
 					</div>
 					<div>
-						<div className="flex items-center gap-4">
-							<h2>{profile.name}</h2>
-							<span className="mt-4 text-hero-text">illustrator&Artist</span>
+						<div className="flex items-center justify-between gap-4">
+							<div className="flex items-center">
+								<h2>{profile.name}</h2>
+								<span className="mt-4 text-hero-text">illustrator&Artist</span>
+							</div>
+							<Button onClick={logoutHandler}>Logout</Button>
 						</div>
 
 						<p className="text-hero-text">
@@ -39,6 +57,7 @@ export function Profile(profile: IUserProfile) {
 				<div className="relative z-10  mb-20 grid grid-cols-3 gap-7 transition-all duration-1000">
 					{profile.purchases.map((course) => (
 						<CourseCard
+							path={'courses'}
 							slug={course.slug}
 							images={course.images}
 							rating={course.rating || 0}

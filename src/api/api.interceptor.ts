@@ -1,7 +1,7 @@
 import axios, { CreateAxiosDefaults } from 'axios';
 import { errorCatch, getContentType } from './api.helper';
 import { getAccessToken, removeFromStorage } from '@/services/auth/auth.helper';
-import { authService } from '@/services/auth/auth.service';
+import { AuthService } from '@/services/auth/auth.service';
 import { API_URL } from '@/config/api.config';
 
 const axiosOptions: CreateAxiosDefaults = {
@@ -36,7 +36,7 @@ instance.interceptors.response.use(
 		) {
 			originalRequest._isRetry = true;
 			try {
-				await authService.getNewTokens();
+				await AuthService.getNewTokens();
 				return instance.request(originalRequest);
 			} catch (error) {
 				if (errorCatch(error) === 'jwt expired') removeFromStorage();

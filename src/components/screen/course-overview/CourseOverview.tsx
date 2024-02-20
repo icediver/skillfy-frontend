@@ -41,7 +41,7 @@ export function CourseOverview({ course, rating, similar }: ICourseOverview) {
 							<CourseTabs course={course} rating={rating} />
 						</div>
 						<div>
-							<PriceCard price={course?.price} sale={50} language={'english'} />
+							<PriceCard course={course} language={'english'} />
 						</div>
 					</div>
 				</div>

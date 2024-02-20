@@ -52,12 +52,13 @@ export function SecondSection({
 				</div>
 				<div
 					ref={ref}
-					className="relative z-10 flex gap-7 transition-all duration-1000"
+					className="relative z-10 flex h-[515px] gap-7 transition-all duration-1000"
 					style={{ marginLeft: -count * 398 }}
 				>
 					{inView &&
 						paginatedCourses.courses.map((course) => (
 							<CourseCard
+								path={'course-overview'}
 								slug={course.slug}
 								images={course.images}
 								rating={course.rating || 0}

@@ -1,15 +1,13 @@
-'use client';
 import Image from 'next/image';
 import { FaRegStar } from 'react-icons/fa6';
 import { FiPlayCircle } from 'react-icons/fi';
 import { IoEyeOutline } from 'react-icons/io5';
-import { useRouter } from 'next/navigation';
-import { useMutation } from '@tanstack/react-query';
-import { UserService } from '@/services/user.service';
 import { ButtonHTMLAttributes } from 'react';
 import clsx from 'clsx';
+import Link from 'next/link';
 
 export interface ICourseCard extends ButtonHTMLAttributes<HTMLButtonElement> {
+	path: string;
 	courseId: number;
 	images: string[];
 	rating: number;
@@ -36,27 +34,15 @@ export function CourseCard({
 	teacherAvatar,
 	slug,
 	className,
+	path,
 }: ICourseCard) {
-	const { push } = useRouter();
-
-	const { mutate } = useMutation({
-		mutationKey: ['toggleFavorite'],
-		mutationFn: () => {
-			return UserService.toggleFavorite(courseId);
-		},
-	});
-
-	function clickHandler() {
-		mutate();
-	}
-
 	return (
-		<button
+		<Link
+			href={`/${path}/${slug}`}
 			className={clsx(
 				'h-[515px] w-[370px] rounded bg-white p-4 duration-700 animate-in fade-in zoom-in spin-in',
 				className
 			)}
-			onClick={() => push(`/courses/${slug}`)}
 		>
 			<div className="mx-auto h-[263px] w-[337px] overflow-hidden rounded">
 				<Image src={images[0]} alt="title" width={337} height={263} />
@@ -93,6 +79,6 @@ export function CourseCard({
 					<span className="font-bold text-primary">${sale}</span>
 				</div>
 			</footer>
-		</button>
+		</Link>
 	);
 }

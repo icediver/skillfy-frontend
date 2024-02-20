@@ -9,6 +9,7 @@ export interface ICourse {
 	slug: string;
 	description: string;
 	price: number;
+	sale: number;
 	images: string[];
 	lessons: string[];
 	createdAt: string;

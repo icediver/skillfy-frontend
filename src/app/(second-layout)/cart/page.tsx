@@ -1,4 +1,5 @@
 import Layout from '@/app/(root)/layout';
+import { ShopingCart } from '@/components/screen/shoping-cart/ShopingCart';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -7,5 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function CartPage() {
-	return <section className="container h-[277px]">dasfdfa</section>;
+	return <ShopingCart />;
 }

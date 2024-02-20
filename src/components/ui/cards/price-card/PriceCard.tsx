@@ -1,3 +1,4 @@
+'use client';
 import { LiaClock } from 'react-icons/lia';
 import Button from '../../button/Button';
 import { IoBookOutline } from 'react-icons/io5';
@@ -14,25 +15,65 @@ import {
 import { TbClockShield } from 'react-icons/tb';
 import { GrCertificate } from 'react-icons/gr';
 import Link from 'next/link';
+import { useActions } from '@/hooks/useActions';
+import { useCart } from '@/hooks/useCart';
+import { ICourse } from '@/types/course.interface';
+import { useProfile } from '@/hooks/useProfile';
+import clsx from 'clsx';
 
 interface IPriceCard {
-	price: number;
-	sale: number;
 	language: string;
+	course: ICourse;
 }
+export function PriceCard({ language, course }: IPriceCard) {
+	const { profile } = useProfile();
+	const { addToCart, removeFromCart } = useActions();
+	const { items } = useCart();
+	const currentElement = items.find(
+		(cartItem) => cartItem.course.id === course.id
+	);
+	const isInPurchase = profile?.purchases.some(
+		(purchase) => purchase.id === course.id
+	);
 
-export function PriceCard({ price, sale, language }: IPriceCard) {
+	console.log(isInPurchase, 'isInPurchase');
+
+	function cartHandler() {
+		if (currentElement) {
+			removeFromCart({ id: currentElement.id });
+		} else addToCart({ course });
+	}
 	return (
 		<div className="h-[738px] w-[371px] rounded-lg bg-white p-8 shadow-lg">
 			<div className="flex items-center justify-center">
-				<h1 className="text-black">${(price * sale) / 100}</h1>
-				<h2 className="mb-2 font-normal text-border">{sale}% off</h2>
+				<h1 className="!p-0 text-black">
+					$
+					{course.sale
+						? ((course.price * course.sale) / 100).toFixed(2)
+						: course.price.toFixed(2)}
+				</h1>
+				<h2 className="mb-2 font-normal text-border">
+					{course.sale ? `${course.sale}% off ` : ''}
+				</h2>
 			</div>
 			<p className="6l mb-4 flex items-center justify-center gap-4 pb-5 text-[#F68C20]">
 				<LiaClock className="text-1.5xl" />
 				11 Hours left at this price
 			</p>
-			<Button className="w-full">Buy now</Button>
+			<Button
+				className={clsx('w-full', {
+					['!active:traslate-y-0 !bg-gray-400']: isInPurchase,
+				})}
+				disabled={isInPurchase}
+				onClick={cartHandler}
+			>
+				{!isInPurchase
+					? !currentElement
+						? 'Buy now'
+						: 'Delete from the cart'
+					: 'Already in your purchase'}
+			</Button>
+
 			<h2 className="text-center">This course includes</h2>
 			<ul className="border-b border-gray-200  text-hero-text">
 				<li className="mb-4 flex items-center gap-6">
