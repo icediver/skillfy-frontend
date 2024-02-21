@@ -36,8 +36,6 @@ export function PriceCard({ language, course }: IPriceCard) {
 		(purchase) => purchase.id === course.id
 	);
 
-	console.log(isInPurchase, 'isInPurchase');
-
 	function cartHandler() {
 		if (currentElement) {
 			removeFromCart({ id: currentElement.id });

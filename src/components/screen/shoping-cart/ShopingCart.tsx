@@ -8,14 +8,16 @@ import Button from '@/components/ui/button/Button';
 import { EnterCoupon } from '@/components/ui/enter-coupon/EnterCoupon';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { UserService } from '@/services/user.service';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useActions } from '@/hooks/useActions';
 import { useRouter } from 'next/navigation';
+import { middleware } from '../../../middleware';
 
 export function ShopingCart() {
+	const queryClient = useQueryClient();
 	const [isCheckout, setIsCheckout] = useState(false);
 	const { push } = useRouter();
 	const { reset } = useActions();
@@ -28,6 +30,7 @@ export function ShopingCart() {
 			UserService.buyCourses(items.map((item) => item.course.id)),
 		onSuccess: () => {
 			toast.success('Courses bought');
+			queryClient.invalidateQueries({ queryKey: ['get profile'] });
 			reset();
 			push('/');
 		},
@@ -48,8 +51,6 @@ export function ShopingCart() {
 			[e.target.name]: e.target.value,
 		}));
 	}
-
-	useEffect(() => console.log(value), [value]);
 
 	return (
 		<section className={clsx('container h-screen', styles.background)}>
