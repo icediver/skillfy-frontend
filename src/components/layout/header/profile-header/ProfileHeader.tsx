@@ -14,7 +14,7 @@ export function ProfileHeader() {
 	const { items } = useCart();
 
 	return (
-		<div className="flex w-[340-px] items-center gap-10 text-navbar">
+		<div className="hidden w-[340-px] items-center text-navbar md:flex md:gap-4 xl:gap-10">
 			<button className="hover:text-blue-800">
 				<FiSearch />
 			</button>

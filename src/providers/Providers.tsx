@@ -17,8 +17,6 @@ const queryClient = new QueryClient({
 });
 
 export function Providers({ children }: { children: ReactNode }) {
-	// const [client] = useState(new QueryClient());
-
 	return (
 		<QueryClientProvider client={queryClient}>
 			<ReduxProvider store={store}>
@@ -26,7 +24,9 @@ export function Providers({ children }: { children: ReactNode }) {
 					{children}
 				</PersistGate>
 			</ReduxProvider>
-			<ReactQueryDevtools initialIsOpen={false} />
+			{/*
+        <ReactQueryDevtools initialIsOpen={false} />
+      */}
 		</QueryClientProvider>
 	);
 }

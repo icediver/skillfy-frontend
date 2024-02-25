@@ -14,7 +14,7 @@ interface IHome {
 
 export function Home({ courses }: IHome) {
 	return (
-		<main className="animate-opacity [&_section]:container">
+		<main className="animate-opacity [&_section]:container ">
 			<Hero />
 			<SecondSection courses={courses} title="Get choice of your course" />
 			<ChoiseCourse />

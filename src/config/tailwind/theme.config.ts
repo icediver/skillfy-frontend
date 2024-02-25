@@ -74,6 +74,13 @@ export const theme = {
 				},
 			},
 		},
+		container: {
+			center: true,
+			padding: {
+				default: '2rem',
+				xl: '0',
+			},
+		},
 
 		animation: {
 			opacity: 'animationOpacity 0.7s ease-in-out',

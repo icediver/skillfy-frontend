@@ -3,20 +3,8 @@
 @tailwind utilities;
 @import 'themes/normal';
 
-:root {
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-  }
-}
-html {
-  font-family: var(--font-poppins);
-  background: var(--foreground-rgb);
-}
-
 body {
-  }
+   }
 h1 {
   @apply text-2.5xl font-medium text-hero-text;
 }
@@ -25,10 +13,4 @@ h2 {
 }
 h3 {
   @apply text-1.25xl font-medium;
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
 }

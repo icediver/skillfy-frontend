@@ -1,0 +1,14 @@
+.background {
+  position: relative;
+  color:#fff;
+}
+
+.background:before {
+  content: "";
+  position: absolute;
+  height: 434px;
+  left: 0;
+  right: 0;
+  background: var(--main-background);
+  z-index:-1;
+}
