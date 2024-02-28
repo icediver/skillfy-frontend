@@ -27,7 +27,7 @@ export async function generateStaticParams() {
 	return paths;
 }
 
-export async function getCourse(params: TypeParamSlug) {
+async function getCourse(params: TypeParamSlug) {
 	const { course, rating } = await CourseService.getBySlug(
 		params?.slug as string
 	);

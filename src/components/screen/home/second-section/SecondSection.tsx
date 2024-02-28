@@ -5,7 +5,6 @@ import { CourseCard } from '@/components/ui/cards/course-card/CourseCard';
 import Image from 'next/image';
 import { useState } from 'react';
 import { FaChevronDown } from 'react-icons/fa6';
-import { courses } from './courses.data';
 import { TypePaginationCourses } from '@/types/course.interface';
 import { useInView } from 'react-intersection-observer';
 
@@ -27,6 +26,7 @@ export function SecondSection({
 		threshold: 0,
 		delay: 100,
 	});
+	const { courses } = paginatedCourses;
 	const { perPage, size } = useResponsiveSize();
 
 	const handlers = useSwipeable({

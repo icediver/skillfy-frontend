@@ -14,7 +14,7 @@ const fetchUser = async () => {
 		},
 	}).then((res) => res.json());
 };
-export async function getCourses() {
+async function getCourses() {
 	const courses = await CourseService.getAll();
 	return courses;
 }

@@ -3,9 +3,9 @@ import timeSince from '@/utils/timeSince';
 import clsx from 'clsx';
 import { nanoid } from 'nanoid';
 import Image from 'next/image';
-import { FaMinus, FaPlus, FaRegStar, FaStar } from 'react-icons/fa6';
+import { FaRegStar, FaStar } from 'react-icons/fa6';
 import { useInView } from 'react-intersection-observer';
-import { ReviewText } from './review-text/ReviewText';
+import { ReviewText } from '../../course-review/review-text/ReviewText';
 
 interface ICourseReview {
 	review: IFullReview;
