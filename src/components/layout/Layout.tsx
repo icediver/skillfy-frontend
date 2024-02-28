@@ -12,6 +12,7 @@ export function Layout({ children, variant = 'primary' }: ILayout) {
 			<Header variant={variant} />
 			{children}
 			<Footer />
+			<TailwindContainer />
 		</>
 	);
 }

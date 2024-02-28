@@ -3,6 +3,7 @@ import { Mulish, Poppins } from 'next/font/google';
 import '../assets/styles/globals.scss';
 import { Providers } from '@/providers/Providers';
 import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const poppins = Poppins({
 	subsets: ['latin'],
