@@ -2,6 +2,8 @@ import { axiosClassic } from '@/api/api.interceptor';
 import { removeFromStorage, saveTokenStorage } from './auth.helper';
 import { IAuthResponse, IFormData } from './auth.types';
 import { getAuthUrl } from '@/config/api.config';
+import { toast } from 'react-toastify';
+import { errorCatch } from '@/api/api.helper';
 
 export enum EnumTokens {
 	'ACCESS_TOKEN' = 'accessToken',
@@ -10,14 +12,20 @@ export enum EnumTokens {
 
 export const AuthService = {
 	async main(type: 'login' | 'register', data: IFormData) {
-		const response = await axiosClassic.post<IAuthResponse>(
-			getAuthUrl(`/${type}`),
-			data
-		);
+		try {
+			const response = await axiosClassic.post<IAuthResponse>(
+				getAuthUrl(`/${type}`),
+				data
+			);
 
-		if (response.data.accessToken) saveTokenStorage(response.data.accessToken);
+			if (response.data?.accessToken)
+				saveTokenStorage(response.data.accessToken);
 
-		return response;
+			return response;
+		} catch (error) {
+			toast.error(errorCatch(error));
+			return error;
+		}
 	},
 
 	async getNewTokens() {

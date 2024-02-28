@@ -6,7 +6,7 @@ import { useCart } from '@/hooks/useCart';
 import { CartItem } from './cart-item/CartItem';
 import Button from '@/components/ui/button/Button';
 import { EnterCoupon } from '@/components/ui/enter-coupon/EnterCoupon';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { UserService } from '@/services/user.service';
@@ -14,7 +14,6 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useActions } from '@/hooks/useActions';
 import { useRouter } from 'next/navigation';
-import { middleware } from '../../../middleware';
 
 export function ShopingCart() {
 	const queryClient = useQueryClient();
