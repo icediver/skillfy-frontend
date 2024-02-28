@@ -10,6 +10,8 @@ import { AuthService } from '@/services/auth/auth.service';
 import { saveTokenStorage } from '@/services/auth/auth.helper';
 import { useRouter } from 'next/navigation';
 import { useMutation } from '@tanstack/react-query';
+import { toast } from 'react-toastify';
+import { errorCatch } from '@/api/api.helper';
 export function Login() {
 	const { push } = useRouter();
 	const {
@@ -27,6 +29,9 @@ export function Login() {
 			saveTokenStorage(data.accessToken);
 			reset();
 			push('/');
+		},
+		onError: (error) => {
+			toast.error(errorCatch(error));
 		},
 	});
 
