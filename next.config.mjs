@@ -12,7 +12,8 @@ const nextConfig = {
 		return [
 			{
 				source: '/uploads/:path*',
-				destination: 'http://localhost:4200/uploads/:path*',
+				// destination: 'http://localhost:4200/uploads/:path*',
+				destination: 'https://skillfy-frontend.vercel.app/uploads/:path*',
 			},
 		];
 	},
