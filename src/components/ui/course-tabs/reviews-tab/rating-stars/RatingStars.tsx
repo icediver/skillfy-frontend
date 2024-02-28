@@ -10,7 +10,7 @@ export function RatingStars({ rating }: IRatingStars) {
 	const stars = Math.trunc(rating);
 	const isHalfStar = rating - stars < 1 && rating - stars > 0.3;
 	return (
-		<div className="mb-3 flex justify-center text-lg text-primary">
+		<div className="mb-3 flex justify-center gap-1 text-lg text-primary">
 			{[...Array(5)].map((_, index) => {
 				if (isHalfStar && index === stars)
 					return <FaStarHalfAlt key={nanoid()} />;

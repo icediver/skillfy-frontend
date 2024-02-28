@@ -102,6 +102,7 @@ export function ShopingCart() {
 								placeholder="Name of card"
 								className="my-2 w-full rounded border py-2 pl-6 outline-none"
 								onChange={onChageHandler}
+								defaultValue={'Visa'}
 							/>
 
 							<input
@@ -110,6 +111,7 @@ export function ShopingCart() {
 								placeholder="Card number"
 								className="my-2 w-full rounded border py-2 pl-6 outline-none"
 								onChange={onChageHandler}
+								defaultValue={'1234 1234 1234 1234'}
 							/>
 							<input
 								type="text"
@@ -117,6 +119,7 @@ export function ShopingCart() {
 								placeholder="Expiration date"
 								className="my-2 w-full rounded border py-2 pl-6 outline-none"
 								onChange={onChageHandler}
+								defaultValue={'12/25'}
 							/>
 							<input
 								type="text"
@@ -124,6 +127,7 @@ export function ShopingCart() {
 								placeholder="Security code"
 								className="my-2 w-full rounded border py-2 pl-6 outline-none"
 								onChange={onChageHandler}
+								defaultValue={'123'}
 							/>
 							<div className="flex items-center justify-between">
 								<p className="text-1.5xl font-medium">Total: </p>

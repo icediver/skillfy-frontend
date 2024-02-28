@@ -56,7 +56,7 @@ export function CourseReview({ review, variant = 'primary' }: ICourseReview) {
 							</div>
 						</div>
 						<div>
-							<div className="mt-2 flex gap-2 text-[#F3B23A]">
+							<div className="mt-2 flex  text-[#F3B23A]">
 								{[...Array(5)].map((_, index) => {
 									if (index < review.rating) return <FaStar key={nanoid()} />;
 									return <FaRegStar key={nanoid()} />;

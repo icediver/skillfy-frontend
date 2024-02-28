@@ -46,7 +46,10 @@ export function SecondSection({
 	}
 
 	return (
-		<article className="relative w-full bg-second-section-background px-4 xl:h-[871px] xl:px-0">
+		<article
+			className="relative w-full bg-second-section-background px-4 xl:h-[871px] xl:px-0"
+			id="courses"
+		>
 			<Image
 				src={PatternGray}
 				alt="pattern"

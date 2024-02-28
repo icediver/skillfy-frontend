@@ -62,23 +62,25 @@ export function CourseCard({
 					<span>Lesion</span>
 				</div>
 			</div>
-			<div className="text-1.5xl">{title}</div>
-			<footer className="mt-6 flex items-center justify-between">
-				<div className="flex items-center gap-4">
-					<Image
-						src={teacherAvatar}
-						alt="teacher"
-						width={40}
-						height={40}
-						className="rounded-lg"
-					/>
-					<span className="text-gray-500">{teacher}</span>
-				</div>
-				<div className="flex gap-4">
-					<span className="line-through">${price}</span>
-					<span className="font-bold text-primary">${sale}</span>
-				</div>
-			</footer>
+			<div className="flex h-[170px] flex-col justify-between pb-5">
+				<div className="text-1.5xl">{title}</div>
+				<footer className="flex items-center justify-between">
+					<div className="flex items-center gap-4">
+						<Image
+							src={teacherAvatar}
+							alt="teacher"
+							width={40}
+							height={40}
+							className="rounded-lg"
+						/>
+						<span className="text-gray-500">{teacher}</span>
+					</div>
+					<div className="flex gap-4">
+						<span className="line-through">${price}</span>
+						<span className="font-bold text-primary">${sale}</span>
+					</div>
+				</footer>
+			</div>
 		</Link>
 	);
 }

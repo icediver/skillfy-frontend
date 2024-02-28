@@ -11,7 +11,7 @@ export function ReviewsTab({ course, rating }: ITabsElement) {
 			<h2 className="pt-0">Students feedback</h2>
 			<div className="flex">
 				<div className="h-[178px] w-[170px] rounded bg-white p-4 text-center text-5xl text-hero-text shadow-sm">
-					{rating}
+					{rating || 0}
 					<RatingStars rating={rating || 0} />
 					<p className="text-sm">Course Rating</p>
 				</div>

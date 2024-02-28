@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import { FaChevronDown } from 'react-icons/fa6';
 const menu: { title: string; value: string }[] = [
-	{ title: 'Home', value: '/home' },
+	{ title: 'Home', value: '/' },
 	{ title: 'Pages', value: '/pages' },
-	{ title: 'Cources', value: '/cources' },
+	{ title: 'Cources', value: '#cources' },
 	{ title: 'Features', value: '/features' },
 	{ title: 'Blog', value: '/blog' },
 	{ title: 'Shop', value: '/shop' },
